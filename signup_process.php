@@ -29,6 +29,7 @@ if (isset($_POST['signup']) && isset($_SESSION['selected_tags'])) {
                 $stmtTag->execute([$userId, $tagId]);
             }
 
+            $_SESSION['user_id'] = $userId;
             header('Location: user_profile.html.php');
             exit;
 
@@ -52,6 +53,11 @@ else if (isset($_POST['signup'])&& !isset($_SESSION['selected_tags'])) {
             // 1. Insert user
             $stmt = $pdo->prepare("INSERT INTO user (username, email, password_hash) VALUES (?, ?, ?)");
             $stmt->execute([$username, $email, $password_hash]);
+
+            $userId = $pdo->lastInsertId();
+
+            $_SESSION['user_id'] = $userId;
+            header('Location: user_profile.html.php');
     }
     catch (PDOException $e) {
         echo "Error: " . $e->getMessage();

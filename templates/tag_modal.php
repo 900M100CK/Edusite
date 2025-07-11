@@ -33,11 +33,7 @@ $tag_select = $pdo->query($sql_tags);
 handleAjaxForm(
   'tagForm',
   'selection_tag.php',
-  () => {
-    alert('Tags saved!');
-    document.getElementById('tagModal').style.display = 'none';
-    window.location.href ='signup.php';
-  },
+  () => {alert('Tags saved!');document.getElementById('tagModal').style.display = 'none';window.location.href ='signup.php';},
   null,
   function (form) {
     const checked = form.querySelectorAll('input[name="tags[]"]:checked');
