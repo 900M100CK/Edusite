@@ -1,0 +1,1165 @@
+/* Đổi theme từ màu xanh dương sang cam hiện đại */
+
+:root {
+    --primary-color: #ff7a00; /* Màu cam chính */
+    --primary-color-dark: #cc6200; /* Màu cam đậm */
+    --light-orange-bg: #fff5e6; /* Nền cam nhạt */
+    --light-orange-text: #cc6200; /* Văn bản cam đậm */
+    --border-color: #e0e0e0; /* Màu viền */
+    --green: #28a745; /* Màu xanh lá */
+    --green-dark: #218838; /* Màu xanh lá đậm */
+}
+/* Hiệu ứng cho tất cả các phần tử khi có trạng thái focus-visible */
+/* Global focus-visible style */
+*:focus-visible {
+    box-shadow: 0 0 0 3px rgba(255, 122, 0, 0.3), 
+                0 0 10px rgba(204, 98, 0, 0.2); /* Kết hợp primary-color-dark */
+    border-color: var(--primary-color-dark);
+    background-color: rgba(255, 122, 0, 0.05); /* Độ trong suốt thấp hơn */
+    transition: all 0.2s ease-in-out;
+}
+
+
+/* --- Nút chính --- */
+.btn-login,
+.btn-signup,
+.btn.btn-login-form,
+.btn.btn-signup-form,
+.btn-ask-question {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: 1px solid var(--primary-color);
+}
+
+.btn-login:hover,
+.btn-signup:hover,
+.btn.btn-login-form:hover,
+.btn.btn-signup-form:hover,
+.btn-ask-question:hover {
+    background-color: var(--primary-color-dark);
+    color: #fff;
+}
+
+/* --- Các liên kết --- */
+.main-nav a:hover,
+.footer-links a:hover,
+.footer-social a:hover,
+.question-title a:hover,
+.login-form .form-group p a:hover,
+.signup-form .form-group p a:hover {
+    color: var(--primary-color);
+}
+
+/* --- Header border --- */
+.header {
+    border-top: 5px solid var(--primary-color);
+}
+
+/* --- Tiêu đề footer --- */
+.footer h3 {
+    color: var(--primary-color);
+}
+
+/* --- Tag chọn --- */
+.form-check-label {
+    transition: all 0.3s ease;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.form-check-input:checked + .form-check-label {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+/* Style cho label khi checkbox được focus */
+.form-check-input:focus + .form-check-label {
+    border-color: var(--primary-color-dark);
+    box-shadow: 0 0 0 3px rgba(255, 122, 0, 0.25); /* Sử dụng rgba với primary-color */
+    background-color: var(--light-orange-bg); /* Dùng màu nền cam nhạt */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Style cho input khi focus */
+.form-check-input:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 2px var(--light-orange-bg);
+}
+
+
+/* --- Progress bar --- */
+.progress-bar {
+    background-color: var(--primary-color);
+}
+
+/* --- Alert --- */
+.alert-login-to-ask-question {
+    background-color: #fff7e6;
+    color: #cc6200;
+    border: 1px solid #ffcd99;
+}
+
+.alert-login-to-ask-question a {
+    color: var(--primary-color);
+}
+
+/* --- Thẻ tag trong danh sách câu hỏi --- */
+.question-tags .tag {
+    background-color: var(--light-orange-bg);
+    color: var(--light-orange-text);
+}
+
+.question-tags .tag:hover {
+    background-color: #ffe0cc;
+}
+
+/* --- Các giá trị số có câu trả lời --- */
+.question-stats .answer-count.has-answers {
+    border-color: var(--green);
+    color: var(--green);
+}
+
+/* --- Các trạng thái active --- */
+.filter-item.active {
+    background-color: #ffe6cc;
+    color: var(--primary-color-dark);
+}
+
+.filter-item:hover:not(.active) {
+    background-color: #fff1e0;
+}
+
+/* --- Modal nút chính --- */
+.btn.btn-primary {
+    background-color: var(--primary-color);
+}
+
+.btn.btn-primary:hover {
+    background-color: var(--primary-color-dark);
+}
+
+/* --- Hamburger icon --- */
+.hamburger span {
+    background: var(--primary-color);
+}
+
+/* --- Logo text --- */
+.logo a {
+    color: var(--primary-color-dark);
+}
+
+/* General Body Styles */
+::-ms-reveal {
+    display: none;
+}
+
+html, body {
+    height: 100%;
+    min-height: 100%;
+}
+
+body {
+    font-family:  "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    color: #333;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    padding-top: 80px;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header Styles */
+.header {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 1rem 0;
+    border-top: 5px solid var(--primary-color);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo h1 {
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+.logo a {
+    text-decoration: none;
+    color: #333;
+}
+
+/* Main Content Styles */
+.main-content {
+    padding: 40px 0;
+}
+
+.main-nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+}
+
+.main-nav li {
+    margin-left: 20px;
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: #555;
+    font-weight: 700;
+    transition: color 0.3s ease;
+}
+
+.main-nav a:hover {
+    color: var(--primary-color);
+}
+
+.auth-buttons .btn {
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    margin-left: 10px;
+    transition: background-color 0.3s ease;
+}
+.auth-avatar-logout {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+.btn-login {
+    background-color: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-login:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.btn-signup {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: 1px solid var(--primary-color);
+}
+
+.btn-signup:hover {
+    background-color: var(--primary-color-dark);
+}
+
+#error-message {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 12px;
+  background-color: #ffe0e0; /* nền đỏ nhạt */
+  color: #cc0000;            /* chữ đỏ đậm */
+  border: 1px solid #ff9999;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  animation: fadeIn 0.5s ease-in-out;
+}
+.form-group input.error {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+/* Hiệu ứng xuất hiện mượt */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* Footer Styles */
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 40px 0 20px;
+    flex-shrink: 0;
+}
+
+.footer .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.footer h3 {
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 10px;
+}
+
+.footer-links a, .footer-social a {
+    text-decoration: none;
+    color: #ccc;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover, .footer-social a:hover {
+    color: #fff;
+}
+
+.footer-social a {
+    margin-right: 15px;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #444;
+}
+
+/* Header Search Styles */
+.header-search {
+    flex-grow: 1;
+    margin: 0 30px;
+}
+
+.header-search form {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.header-search input[type="search"] {
+    border: none;
+    padding: 10px;
+    font-size: 1rem;
+    width: 100%;
+    outline: none;
+}
+
+.header-search button {
+    background-color: #ffffff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+.header-search button:hover {
+    background-color: var(--primary-color-dark);
+}
+
+.header-search button svg {
+    stroke: #000000;
+}
+
+/* Main Content Styles */
+.main-content {
+    flex: 1 0 auto;
+    padding: 40px 0;
+}
+
+/* --- Main Layout --- */
+.site-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px 0;
+    min-height: 80vh;
+    box-sizing: border-box;
+    flex: 1 0 auto;
+}
+
+#login-form-container.site-container,
+#signup-form-container.site-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    width: 100%;
+    min-height: 80vh;
+    box-sizing: border-box;
+}
+
+.alert-login-to-ask-question {
+    background-color: #fff7e6;
+    color: #cc6200;
+    border: 1px solid #ffcd99;
+    border-radius: 5px;
+    padding: 15px 20px;
+    margin: 20px auto;
+    max-width: 600px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    font-family: Arial, sans-serif;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.alert-login-to-ask-question .alert-message {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.alert-login-to-ask-question a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.alert-login-to-ask-question a:hover {
+    text-decoration: underline;
+}
+
+.login-container,
+.signup-container {
+    width: 100%;
+    max-width: 420px;
+}
+
+/* --- Kiểu cho form đăng nhập & đăng ký --- */
+.login-form,
+.signup-form {
+    background-color: #fff;
+    padding: 30px 40px;
+    border-radius: 8px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+}
+
+.login-container h2,
+.signup-container h2 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: #232629;
+}
+
+/* --- Kiểu cho các nhóm form (label + input) --- */
+.login-form .form-group,
+.signup-form .form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form label,
+.signup-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"],
+.signup-form input[type="text"],
+.signup-form input[type="email"],
+.signup-form input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #d6d9dc;
+    border-radius: 6px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.login-form input:focus,
+.signup-form input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(255, 122, 0, 0.25);
+    outline: none;
+}
+
+/* --- Password visibility toggle --- */
+.password-wrapper,
+.confirm-password-wrapper {
+    position: relative;
+}
+
+.password-wrapper input[type="password"],
+.password-wrapper input[type="text"],
+.confirm-password-wrapper input[type="password"],
+.confirm-password-wrapper input[type="text"] {
+    padding-right: 45px;
+}
+
+.password-wrapper .bx,
+.confirm-password-wrapper .bx {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #888;
+    display: block;
+}
+.toggle-password {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);;
+  cursor: pointer;
+  font-size: 18px;
+  color: #666;
+}
+
+/* --- Kiểu cho nút bấm và liên kết --- */
+.btn.btn-login-form,
+.btn.btn-signup-form {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    background-color: var(--primary-color);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn.btn-login-form:hover,
+.btn.btn-signup-form:hover {
+    background-color: var(--primary-color-dark);
+}
+
+.btn.btn-signup-form {
+    background-color: var(--green);
+}
+
+.btn.btn-signup-form:hover {
+    background-color: var(--green-dark); /* SỬA LỖI: Sử dụng biến */
+}
+
+.login-form .form-group p,
+.signup-form .form-group p {
+    text-align: center;
+    margin: 15px 0 0 0;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.login-form .form-group p a,
+.signup-form .form-group p a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.login-form .form-group p a:hover,
+.signup-form .form-group p a:hover {
+    text-decoration: underline;
+}
+
+.popover {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.progress {
+    width: 100%;
+    background-color: #f3f3f3;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.progress-bar {
+    height: 10px;
+    background-color: var(--green);
+    width: 0%;
+    transition: width 0.3s;
+}
+
+/* --- Vertical Navigation Sidebar --- */
+.vertical-nav {
+    width: 200px;
+    min-height: 500px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    margin-right: 32px;
+    padding: 24px 0 24px 0;
+    position: relative;
+    z-index: 2;
+}
+
+.vertical-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.vertical-nav li {
+    margin-bottom: 12px;
+}
+
+.vertical-nav a {
+    display: block;
+    padding: 10px 24px;
+    color: #222;
+    font-weight: 600;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.vertical-nav a:hover, .vertical-nav a.active {
+    background: #e3f0ff;
+    color: var(--primary-color);
+}
+
+/* Main content area */
+.main-content-area {
+    flex: 1;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    padding: 32px;
+    min-height: 500px;
+    position: relative;
+    z-index: 1;
+}
+
+/* --- Main Content Area --- */
+.main-content-area { width: 100%; }
+.page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+.page-title { margin: 0; font-size: 1.75rem; font-weight: 700; }
+.btn-ask-question { font-size: 0.9rem; background-color: var(--primary-color); color: #fff; text-decoration: none; padding: 6px 10px; border-radius: 6px; border: 1px solid var(--primary-color); }
+.btn-ask-question:hover { background-color: var(--primary-color-dark); }
+
+/* --- Question Filters --- */
+.question-filters { display: flex; border: 1px solid var(--border-color); border-radius: 6px; margin-bottom: 16px; overflow: hidden; }
+.filter-item { padding: 10px 15px; text-decoration: none; color: #555; background-color: #fff; border-right: 1px solid var(--border-color); flex-grow: 1; text-align: center; font-size: 0.9rem; }
+.filter-item:last-child { border-right: none; }
+.filter-item.active { background-color: #e3e6e8; font-weight: 700; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); }
+.filter-item:hover:not(.active) { background-color: #f8f9fa; }
+
+/* --- Question List --- */
+.question-list { background-color: #fff; border: 1px solid var(--border-color); border-radius: 6px; }
+.question-summary { display: flex; padding: 16px; border-bottom: 1px solid var(--border-color); }
+.question-summary:last-child { border-bottom: none; }
+.question-stats { display: flex; flex-direction: column; align-items: flex-end; margin-right: 16px; color: #555; font-size: 0.8rem; width: 60px; flex-shrink: 0; }
+.question-stats .stat-item { margin-bottom: 8px; text-align: center; }
+.question-stats .stat-item span { font-weight: 700; font-size: 1.1rem; display: block; color: #111;}
+.question-stats .answer-count { border: 1px solid transparent; padding: 4px 6px; border-radius: 5px; min-width: 50px; }
+.question-stats .answer-count.has-answers { border-color: var(--green); color: var(--green); }
+
+.question-details { flex-grow: 1; }
+.question-title { margin: 0 0 8px 0; font-size: 1.1rem; font-family: 'Roboto', sans-serif; font-weight: 500; }
+.question-title a { text-decoration: none; color: var(--primary-color-dark); }
+.question-title a:hover { color: var(--primary-color); }
+.question-excerpt { font-size: 0.9rem; color: #444; margin: 0 0 12px 0; display: -webkit-box;-webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.question-meta { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+.question-tags .tag { display: inline-block; margin: 0 4px 4px 0; padding: 4px 8px; background-color: var(--light-orange-bg); color: var(--light-orange-text); font-size: 0.8rem; text-decoration: none; border-radius: 5px; }
+.question-tags .tag:hover { background-color: #d1e5f1; }
+.question-author { font-size: 0.8rem; color: #888; margin-left: auto; padding-left: 10px; }
+.question-author a { color: var(--primary-color-dark); text-decoration: none; }
+
+/* --- Full Page Loader --- */
+#page-loader, #ajax-loader {
+    position: fixed;
+    z-index: 2000;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #fff;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s;
+}
+
+.loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid var(--primary-color); /* SỬA LỖI: Sử dụng màu theme */
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Accessibility Styles */
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    background: var(--primary-color);
+    color: white;
+    padding: 8px;
+    z-index: 100;
+    opacity: 0.8;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+}
+
+.skip-link:focus {
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 1;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+
+/* Hamburger Icon Styles */
+.hamburger {
+    display: none; /* Ẩn trên màn hình lớn */
+    flex-direction: column;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1100;
+    padding: 0;
+}
+
+.hamburger span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background: #333;
+    margin: 4px 0;
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+/* Modal Content */
+.modal-tag {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-tag-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 24px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    position: relative;
+}
+
+.modal-tag-close {
+    color: #aaa;
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.modal-tag-close:hover {
+    color: #333;
+}
+
+.form-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.form-check {
+    position: relative;
+}
+
+.form-check-input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.form-check-label {
+    display: inline-block;
+    padding: 8px 14px;
+    border: 2px solid var(--primary-color);
+    border-radius: 20px;
+    background-color: #fff;
+    color: var(--primary-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.form-check-input:not(:checked) + .form-check-label:hover {
+    background-color: var(--light-gray);
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.form-check-input:checked + .form-check-label {
+    background-color: var(--primary-color);
+    color: #fff;
+    border-color: var(--primary-color);
+    box-shadow: 0 2px 5px rgba(255, 122, 0, 0.4);
+}
+
+.btn.btn-primary {
+    background-color: var(--primary-color);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn.btn-primary:hover {
+    background-color: var(--primary-color-dark);
+}
+
+/* Sidebar close button */
+.sidebar-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+    padding: 5px;
+    border-radius: 3px;
+    transition: color 0.2s;
+    z-index: 10;
+}
+
+.sidebar-close:hover {
+    color: #333;
+    background-color: #f0f0f0;
+}
+
+/* --- STYLES FOR AUTH PAGES (NEW) --- */
+/* SỬA LỖI: Di chuyển khối này ra ngoài @media query để áp dụng cho mọi kích thước màn hình */
+
+/* Luôn hiển thị biểu tượng hamburger trên các trang auth (login/signup) */
+body.auth-page .hamburger {
+    display: flex;
+    margin-right: 15px;
+}
+
+/* Trên các trang auth, ẩn menu điều hướng chính */
+body.auth-page .main-nav {
+    display: none;
+}
+
+/* Chuẩn bị sidebar cho trang auth (hoạt động giống mobile) */
+body.auth-page .vertical-nav {
+    position: fixed;
+    left: -220px; /* Bắt đầu ở trạng thái ẩn */
+    top: 0;
+    height: 100%;
+    width: 200px;
+    background: #fff;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+    transition: left 0.3s ease-in-out;
+    z-index: 1050;
+    padding-top: 60px;
+    margin-right: 0;
+    display: block; /* Luôn là block để có thể hiện ra */
+}
+
+body.auth-page .vertical-nav.open {
+    left: 0;
+}
+
+/* --- Responsive Design --- */
+.avatar-preview img { border-radius: 50%; width: 120px; height: 120px; object-fit: cover; }
+.form-group { margin-bottom: 20px; }
+
+
+/* Hide sidebar close button on desktop */
+@media (min-width: 993px) {
+    .sidebar-close {
+        display: none;
+    }
+}
+
+@media (max-width: 992px) {
+    body {
+        padding-top: 150px; /* Tăng padding để vừa với header cao hơn trên mobile */
+    }
+
+    .header .container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+    }
+
+    .logo {
+        order: 2;
+        flex-grow: 1;
+        text-align: center;
+    }
+
+    .hamburger {
+        display: flex; /* Hiển thị hamburger icon */
+        order: 1;
+    }
+
+    .auth-buttons {
+        order: 3;
+    }
+
+    .main-nav {
+        display: none; /* Ẩn menu chính, thay bằng sidebar */
+    }
+
+    .header-search {
+        order: 4;
+        width: 100%;
+        margin: 15px 0 0 0;
+    }
+
+    .vertical-nav {
+        display: none; /* Ẩn sidebar mặc định trên mobile */
+        position: fixed;
+        left: -220px; /* Ẩn sidebar ra ngoài màn hình */
+        top: 0;
+        height: 100%;
+        width: 200px;
+        background: #fff;
+        box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+        transition: left 0.3s ease-in-out;
+        z-index: 1050;
+        padding-top: 60px; /* Tạo không gian phía trên */
+    }
+
+    .vertical-nav.open {
+        display: block; /* Chỉ hiện khi có class 'open' */
+        left: 0;
+    }
+}
+
+@media (max-width: 900px) {
+    .site-container {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .main-content-area {
+        padding: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .auth-buttons .btn {
+        padding: 6px 10px;
+        font-size: 0.9rem;
+    }
+
+    .logo h1 {
+        font-size: 1.5rem;
+    }
+}
+.avatar-container {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+        border: 2px dashed #ddd;
+        border-radius: 8px;
+        padding: 10px;
+        transition: border-color 0.3s ease;
+    }
+
+    .avatar-container:hover,
+    .avatar-container.dragover {
+        border-color: #007bff;
+    }
+
+    .avatar-preview-img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 50%;
+        display: block;
+    }
+
+    .avatar-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        border-radius: 8px;
+    }
+
+    .avatar-container:hover .avatar-overlay {
+        opacity: 1;
+    }
+
+    .avatar-overlay-text {
+        color: white;
+        font-size: 12px;
+        text-align: center;
+    }
+
+    .btn-upload-avatar {
+        margin-top: 10px;
+        padding: 8px 16px;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    .btn-upload-avatar:hover {
+        background: #0056b3;
+    }
+
+    .btn-upload-avatar:focus {
+        outline: 2px solid #007bff;
+        outline-offset: 2px;
+    }
+
+    .alert {
+        padding: 12px;
+        margin-bottom: 20px;
+        border-radius: 4px;
+    }
+
+    .alert-success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .alert-danger {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+
+    .form-text {
+        font-size: 12px;
+        color: #666;
+        margin-top: 5px;
+    }
+
+    .profile-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .tag-item {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+/* === Responsive === */
+@media (max-width: 768px) {
+    .profile-container {
+        padding: 20px;
+        margin: 20px;
+    }
+    .avatar-preview img {
+        width: 100px;
+        height: 100px;
+    }
+    .btn-save-profile {
+        width: 100%;
+    }
+}
