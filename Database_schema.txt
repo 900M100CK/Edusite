@@ -1,0 +1,298 @@
+-- Table for storing user information
+
+-- =============================================
+
+CREATE TABLE USER (
+
+    id INT PRIMARY KEY AUTO_INCREMENT,
+
+    username VARCHAR(255) NOT NULL UNIQUE,
+
+    email VARCHAR(255) NOT NULL UNIQUE,
+
+    password_hash VARCHAR(255) NOT NULL,
+
+    status TINYINT NOT NULL DEFAULT 0, -- 0=pending, 1=active,
+
+    role ENUM('user', 'admin') NOT NULL DEFAULT 'user',
+
+    reputation INT NOT NULL DEFAULT 0,
+
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    last_login_date DATETIME,
+
+    avatar VARCHAR(255)
+
+);
+
+
+
+-- =============================================
+
+-- Table for storing administrator details and permissions
+
+-- This links to a USER account.
+
+-- =============================================
+
+CREATE TABLE ADMIN (
+
+    admin_id INT PRIMARY KEY AUTO_INCREMENT,
+
+    user_id INT NOT NULL UNIQUE,
+
+    permissions VARCHAR(255),
+
+    FOREIGN KEY (user_id) REFERENCES USER(id) ON DELETE CASCADE
+
+);
+
+
+
+-- =============================================
+
+-- Table for posts, which can be questions or answers
+
+-- =============================================
+
+CREATE TABLE POST (
+
+    id INT PRIMARY KEY AUTO_INCREMENT,
+
+    user_id INT NOT NULL,
+
+    -- If parent_id is NULL, it's a question. If it has a value, it's an answer to the post with that ID.
+
+    parent_id INT NULL,
+
+    title VARCHAR(255), -- Title is only for questions, can be NULL for answers.
+
+    content TEXT NOT NULL,
+
+    post_type ENUM('question', 'answer') NOT NULL,
+
+    vote_count INT NOT NULL DEFAULT 0,
+
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    updated_at DATETIME,
+
+    closed_at DATETIME,
+
+
+    FOREIGN KEY (user_id) REFERENCES USER(id) ON DELETE CASCADE,
+
+    FOREIGN KEY (parent_id) REFERENCES POST(id) ON DELETE CASCADE
+
+);
+
+
+
+-- =============================================
+
+-- Table for storing all tags that can be applied to questions
+
+-- =============================================
+
+CREATE TABLE TAG (
+
+    id INT PRIMARY KEY AUTO_INCREMENT,
+
+    name VARCHAR(100) NOT NULL UNIQUE,
+
+    description VARCHAR(255)
+
+);
+
+
+
+-- =============================================
+
+-- Junction (or linking) table for the many-to-many relationship
+
+-- between posts (questions) and tags.
+
+-- =============================================
+
+CREATE TABLE POST_TAG (
+
+    post_id INT NOT NULL,
+
+    tag_id INT NOT NULL,
+
+    PRIMARY KEY (post_id, tag_id),
+
+    FOREIGN KEY (post_id) REFERENCES POST(id) ON DELETE CASCADE,
+
+    FOREIGN KEY (tag_id) REFERENCES TAG(id) ON DELETE CASCADE
+
+);
+
+
+
+-- =============================================
+
+-- Table for storing comments on posts
+
+-- =============================================
+
+CREATE TABLE COMMENT (
+
+    id INT PRIMARY KEY AUTO_INCREMENT,
+
+    user_id INT NOT NULL,
+
+    post_id INT NOT NULL,
+
+    content TEXT NOT NULL,
+
+    score INT NOT NULL DEFAULT 0,
+
+    is_edited BOOLEAN NOT NULL DEFAULT FALSE,
+
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+
+    FOREIGN KEY (user_id) REFERENCES USER(id) ON DELETE CASCADE,
+
+    FOREIGN KEY (post_id) REFERENCES POST(id) ON DELETE CASCADE
+
+);
+
+
+
+-- =============================================
+
+-- Table to record votes on posts
+
+-- vote_type: 1 for upvote, -1 for downvote
+
+-- =============================================
+
+CREATE TABLE VOTE (
+
+    id INT PRIMARY KEY AUTO_INCREMENT,
+
+    user_id INT NOT NULL,
+
+    post_id INT NOT NULL,
+
+    vote_type TINYINT NOT NULL, -- Can be 1 for upvote or -1 for downvote
+
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    -- A user can only vote once on a single post
+
+    UNIQUE (user_id, post_id),
+
+    FOREIGN KEY (user_id) REFERENCES USER(id) ON DELETE CASCADE,
+
+    FOREIGN KEY (post_id) REFERENCES POST(id) ON DELETE CASCADE
+
+);
+
+
+
+-- =============================================
+
+-- Table to track the edit history of posts and comments
+
+-- =============================================
+
+CREATE TABLE EDIT_HISTORY (
+
+    id INT PRIMARY KEY AUTO_INCREMENT,
+
+    user_id INT NOT NULL,
+
+    -- Either post_id or comment_id will be filled, but not both
+
+    post_id INT NULL,
+
+    comment_id INT NULL,
+
+    old_content TEXT,
+
+    new_content TEXT,
+
+    edited_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (user_id) REFERENCES USER(id) ON DELETE CASCADE,
+
+    FOREIGN KEY (post_id) REFERENCES POST(id) ON DELETE CASCADE,
+
+    FOREIGN KEY (comment_id) REFERENCES COMMENT(id) ON DELETE CASCADE
+
+);
+
+
+
+-- =============================================
+
+-- Table to track a user's interaction and score with specific tags.
+
+-- =============================================
+
+CREATE TABLE USER_TAG (
+
+    user_id INT NOT NULL,
+
+    tag_id INT NOT NULL,
+
+    score INT NOT NULL DEFAULT 0, -- Represents user's activity score within this tag (e.g., from upvoted answers)
+
+    PRIMARY KEY (user_id, tag_id),
+
+    FOREIGN KEY (user_id) REFERENCES USER(id) ON DELETE CASCADE,
+
+    FOREIGN KEY (tag_id) REFERENCES TAG(id) ON DELETE CASCADE
+
+);
+
+
+
+-- =============================================
+
+-- NEW: Table to handle persistent user sessions ("Remember Me")
+
+-- =============================================
+
+CREATE TABLE user_sessions (
+
+    id INT PRIMARY KEY AUTO_INCREMENT,
+
+    user_id INT NOT NULL,
+
+    -- A long, secure, random token stored in a user's cookie
+
+    session_token VARCHAR(255) NOT NULL UNIQUE,
+
+    -- Optional security fields
+
+    user_agent VARCHAR(255),
+
+    -- The date when this session token is no longer valid
+
+    expires_at DATETIME NOT NULL,
+
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (user_id) REFERENCES USER(id) ON DELETE CASCADE
+
+);
+
+-- =============================================
+-- Table for storing images attached to posts
+-- =============================================
+CREATE TABLE IMAGE (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    post_id INT NOT NULL,
+    filename VARCHAR(255) NOT NULL,
+    original_filename VARCHAR(255) NOT NULL,
+    file_path VARCHAR(500) NOT NULL,
+    file_size INT NOT NULL,
+    mime_type VARCHAR(100) NOT NULL,
+    uploaded_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (post_id) REFERENCES POST(id) ON DELETE CASCADE
+);
