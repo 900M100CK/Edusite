@@ -1,0 +1,15 @@
+# Composer dependencies
+/vendor/
+
+# Environment variables
+# Create a .env.example file with dummy values and commit that instead
+.env
+
+# Log files
+*.log
+
+# IDE and OS files
+.idea/
+.vscode/
+*.DS_Store
+Thumbs.db
